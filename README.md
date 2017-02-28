@@ -16,12 +16,12 @@ Let's think of an analogy. Everyday I drive a car and through some miracle of en
 
 This is basically what we will be doing when using Twitter's API. We don't necessarily care about the deep inner workings of Twitter. We will just be using its API which will allow us to use Twitter's platform in our own programs.
 
-
 # Get you Twitter API Key
 
 ### Signing up for Twitter
+First thing's first, we need to create a Twitter account for our bot. [Signing up](https://twitter.com/signup) for a Twitter account is fairly simple and should onle take a couple of minutes. After clicking on the "Signing up" hyperlink you will be redirected to the following screen,
 
-First thing's first, we need to create a Twitter account for our bot. [Signing up](https://twitter.com/signup) for a Twitter account is fairly simple and should onle take a couple of minutes. 
+![twitterSignUp](jcarrabino.github.io/TwitterBot/pics/twitterSignUp.png)
 
 ### Get your own Twitter API Key
 
