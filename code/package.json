@@ -1,0 +1,17 @@
+{
+  "name": "TwitBot",
+  "version": "1.0.0",
+  "description": "CS290 How-To Project",
+  "main": "bot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "John Carrabino Jr.",
+  "license": "ISC",
+  "dependencies": {
+    "forever": "^0.15.3",
+    "mstranslator": "^2.1.1",
+    "node-schedule": "^1.2.0",
+    "twit": "^2.2.5"
+  }
+}
