@@ -60,6 +60,3 @@ First thing's first, we need to create a Twitter account for our bot. [Signing u
 - [Twitter API Documentation](https://dev.twitter.com/overview/api)
 - [Twit Node Client Documentation](https://github.com/ttezel/twit)
 - [MSTranslator Documentation](https://github.com/nanek/mstranslator)
-=======
-# jcarrabino.github.io
-How-To Create a Twitter Translator bot
