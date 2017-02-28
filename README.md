@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # This guide will explain:
 - What a Web API is
 - How to get a Twitter API Key
@@ -64,4 +63,3 @@ First thing's first, we need to create a Twitter account for our bot. [Signing u
 =======
 # jcarrabino.github.io
 How-To Create a Twitter Translator bot
->>>>>>> 8f23d1b9ee07bca5ab192f4e58cb6564d3a4c6c0
