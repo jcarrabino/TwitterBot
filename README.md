@@ -1,9 +1,9 @@
 # This guide will explain:
-- What a Web API is
-- How to get a Twitter API Key
-- How to get an MSTranslator Key
-- How to use the Twitter API
-- How to use the MSTranslator API
+- [What a Web API is](#what-is-a-web-api)
+- [How to get a Twitter API Key](#get-your-twitter-api-key)
+- [How to get an MSTranslator Key](#get-your-mstranslator-api-key)
+- [How to use the Twitter API](#how-to-use-twit)
+- [How to use the MSTranslator API](#how-to-use-mstranslator)
 - [How to automate your Twitter bot](#how-to-reply-to-tweets)
 
 # What will the finished bot look like?
@@ -39,17 +39,17 @@ First thing's first, we need to create a Twitter account for our bot. [Signing u
 
 ### Structure of an API request
 
+### TheJSON Response
+
+### Parsing data from a JSON response
+
 # How to use MSTranslator
 
 ### Get MSTranslator up and running
 
 ### Structure of a text translation request
 
-# How to handle a JSON Response
-
-### Parsing data from a JSON Request
-
-# How to reply to tweets
+# Replying to tweets
 
 ### Pulling text from tweets to translate
 
