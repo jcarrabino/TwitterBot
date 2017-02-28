@@ -4,10 +4,10 @@
 - How to get an MSTranslator Key
 - How to use the Twitter API
 - How to use the MSTranslator API
-- How to automate your Twitter bot
+- [How to automate your Twitter bot](#how-to-reply-to-tweets)
 
 # What will the finished bot look like?
-Our end product will be able to pull tweets from Twitter based on specific criteria, and retweet them with the translated text in the comment. 
+Our finished bot will be able to pull a tweet from Twitter based your specified search criteria, then reply to the original tweet's user with a translation of their tweet in whatever language you choose. 
 
 # What is a Web API?
 API stands for Application Programming Interface. It's quite a mouthful and a fancy name for a relatively simple concept. In one sentence, an API is an interface that lets a program that you are writing control or access another program that some other person wrote. Now why would this be useful?
