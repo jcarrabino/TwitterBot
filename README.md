@@ -4,7 +4,7 @@
 - [How to get an MSTranslator Key](#get-your-mstranslator-api-key)
 - [How to use the Twitter API](#how-to-use-twit)
 - [How to use the MSTranslator API](#how-to-use-mstranslator)
-- [How to automate your Twitter bot](#how-to-reply-to-tweets)
+- [How to automate your Twitter bot](#replying-to-tweets)
 
 # What will the finished bot look like?
 Our finished bot will be able to pull a tweet from Twitter based your specified search criteria, then reply to the original tweet's user with a translation of their tweet in whatever language you choose. 
