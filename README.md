@@ -1,5 +1,5 @@
 # This guide will explain:
-- [What a Web API is](#what-is-a-web-api)
+- [What is a Web API?](#what-is-a-web-api)
 - [How to get a Twitter API Key](#get-your-twitter-api-key)
 - [How to get an MSTranslator Key](#get-your-mstranslator-api-key)
 - [How to use the Twitter API](#how-to-use-twit)
