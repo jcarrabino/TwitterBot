@@ -19,7 +19,7 @@ This is basically what we will be doing when using Twitter's API. We don't neces
 # Get your Twitter API Key
 
 ### Signing up for Twitter
-First thing's first, we need to create a Twitter account for our bot. [Signing up](https://twitter.com/signup) for a Twitter account is fairly simple and should onle take a couple of minutes. After clicking on the "Signing up" hyperlink you will be redirected to the following screen, 
+First thing's first, we need to create a Twitter account for our bot. **[Signing up](https://twitter.com/signup)** for a Twitter account is fairly simple and should onle take a couple of minutes. After clicking on the "Signing up" hyperlink you will be redirected to the following screen, 
 
 ![twitterSignUp](jcarrabino.github.io/pics/twitterSignUp.png)
 
