@@ -111,7 +111,29 @@ Before we can make calls to Twit, we will need to get our local environment up a
 
 The first thing we need to do is to create a new directory(an empty folder) where the Twitter Bot's source code wil be stored. We will be using the Twit library, which is a Twitter API Client made for node.js. Twit contains a set of precompiled cocmmands that will allow us to more easily interact with Twitter's API.
 
-You can install Twit by running, 'npm install twit', in the command line. 
+You can install Twit by running, `npm install twit`, in the command line. Once Twit finishes installing create a new javascript file inside the Twitter bot's directory, for simplicity sake, let's call it `bot.js`. This is where we will be writing the code for our Twitter bot. 
+
+Now create a separate javascript file titled `config.js`, also within your bot's directory. This is where we will store our Twitter API Keys. The contents of this file should look like this,
+'''javascript
+module.exports = {
+    consumer_key : "",
+    consumer_secret : "",
+    access_token : "",
+    access_token_secret : ""
+}
+'''
+You should then copy and pasy your four Twitter Keys/Tokens inside the double quotes next to their corresponding variable names. When you have finished this go back to `bot.js`. Now that we have our keys stored in a configuration file we can initialize a Twit object by executing the following lines of code,
+'''javascript
+//Set up Twitter 
+var twit = require('twit');
+
+//Include Keys stored in config.js
+var config = require('./config.js');
+
+//Initialize Twit object
+var Twitter = new twit(config);
+'''
+
 
 ### Structure of an API request
 
