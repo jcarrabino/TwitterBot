@@ -114,16 +114,16 @@ The first thing we need to do is to create a new directory(an empty folder) wher
 You can install Twit by running, `npm install twit`, in the command line. Once Twit finishes installing create a new javascript file inside the Twitter bot's directory, for simplicity sake, let's call it `bot.js`. This is where we will be writing the code for our Twitter bot. 
 
 Now create a separate javascript file titled `config.js`, also within your bot's directory. This is where we will store our Twitter API Keys. The contents of this file should look like this,
-'''javascript
+```javascript
 module.exports = {
     consumer_key : "",
     consumer_secret : "",
     access_token : "",
     access_token_secret : ""
 }
-'''
+```
 You should then copy and pasy your four Twitter Keys/Tokens inside the double quotes next to their corresponding variable names. When you have finished this go back to `bot.js`. Now that we have our keys stored in a configuration file we can initialize a Twit object by executing the following lines of code,
-'''javascript
+```javascript
 //Set up Twitter 
 var twit = require('twit');
 
@@ -132,12 +132,86 @@ var config = require('./config.js');
 
 //Initialize Twit object
 var Twitter = new twit(config);
-'''
+```
+Now that we've initialized our Twit object we can access the calls provided to us by the Twit library. At this point we are ready to make test calls to send/receive data from Twitter. 
 
 
 ### Structure of an API request
+Let's say that I want to GET the most popular tweet send out by Donald Trump. I could write something like this,
+
+```javascript
+// find latest tweet according the query 'q' in params
+var params = {
+    q: 'from:realDonaldTrump',  // REQUIRED
+    result_type: 'recent',
+    count: '1'
+}
+// for more parametes, see: https://dev.twitter.com/rest/reference/get/search/tweets
+
+Twitter.get('search/tweets', params, function(err, data, response){
+      console.log(err);
+      console.log(data);
+      console.log(response);
+ });
+```
+Twit's get function allows us to send an API request to Twitter, and is structured as `Twitter.get(path,[params], callback)`.
+
+The first parameter, path, specifies the endpoint to hit. So by setting path to "search/tweets" we are telling the request to search through the tweets at Twitter's API endpoint. 
+
+The second parameter, [params], defines the parameters of our request. This is used to construct the API's request URL. The only required parameter in params is "q" which is the query parameter. The above request is searching specifically for tweets from realDonaldTrump. 
+
+The last parameter is the callback function. Every method in the Twit library has a callback function passed as the last parameter. The callback function is formatted as such, `function(err, data, response)`. Where "err" will log any error messages if a bad request was sent, "data" will contain the parsed data received from Twitter, and "response" is the http.IncomingMessage received from Twitter.
+
 
 ### TheJSON Response
+
+After calling the get function with a valid request, all of the parsed JSON data we want will be located in the "data" object of the callback function. 
+
+So the function,
+```javascript
+Twitter.get('search/tweets', params, function(err, data, response){
+      console.log(data);
+ });
+```
+Returns the following parsed JSON object,
+```
+{ statuses:
+   [ { created_at: 'Wed Mar 01 01:30:49 +0000 2017',
+       id: 836750538943377400,
+       id_str: '836750538943377408',
+       text: 'Join me live at 9:00 P.M. \n#JointAddress https://t.co/J882zbyVkJ https://t.co/gTtK3vJmkU',
+       truncated: false,
+       entities: [Object],
+       extended_entities: [Object],
+       metadata: [Object],
+       source: '<a href="http://twitter.com/download/iphone" rel="nofollow">Twitter for iPhone</a>',
+       in_reply_to_status_id: null,
+       in_reply_to_status_id_str: null,
+       in_reply_to_user_id: null,
+       in_reply_to_user_id_str: null,
+       in_reply_to_screen_name: null,
+       user: [Object],
+       geo: null,
+       coordinates: null,
+       place: null,
+       contributors: null,
+       is_quote_status: false,
+       retweet_count: 5976,
+       favorite_count: 38833,
+       favorited: false,
+       retweeted: false,
+       possibly_sensitive: false,
+       lang: 'en' } ],
+  search_metadata:
+   { completed_in: 0.012,
+     max_id: 0,
+     max_id_str: '0',
+     next_results: '?max_id=836750538943377407&q=from%3ArealDonaldTrump&count=1&include_entities=1&result_type=popular',
+     query: 'from%3ArealDonaldTrump',
+     count: 1,
+     since_id: 0,
+     since_id_str: '0' } }
+```
 
 ### Parsing data from a JSON response
 
