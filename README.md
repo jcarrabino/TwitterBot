@@ -199,7 +199,7 @@ Twitter.get('search/tweets', params, function(err, data, response){
  });
 ```
 Returns the following parsed JSON object,
-```
+```javascript
 { statuses:
    [ { created_at: 'Wed Mar 01 01:30:49 +0000 2017',
        id: 836750538943377400,
