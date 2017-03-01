@@ -16,6 +16,8 @@ Let's think of an analogy. Everyday I drive a car and through some miracle of en
 
 This is basically what we will be doing when using Twitter's API. We don't necessarily care about the deep inner workings of Twitter. We will just be using its API which will allow us to use Twitter's platform in our own programs.
 
+
+[Back to top](#this-guide-will-explain)
 # Get your Twitter API Key
 
 ### Signing up for Twitter
@@ -40,6 +42,7 @@ Now, click on the button that says "Create New App" which will send you to the f
 </p>
 
 Here you will fill out all of the required fields in order to create your new Twitter app. If you are unsure of what to use for your website, you can just put your Twitter bot's profile page for now, which should look like this, "twitter.com/(Your-Twitter-Bot-UserName)"
+
 
 [Back to top](#this-guide-will-explain)
 ### Get your own Twitter API Key
@@ -66,6 +69,8 @@ Notice the tabs listed at the top right under your app's name. Now click the thi
 
 At this point you should take a moment to copy and paste your API Key, API Secret, Access Token, and Access Token Secret into a separate text document. You will need to use these later on, as these are the four keys you will need to access and work with Twitter's API.
 
+
+[Back to top](#this-guide-will-explain)
 # Get your MSTranslator API Key
 
 ### Signing up for an account on Windows Azure Marketplace
@@ -97,6 +102,8 @@ If you successfully signed up for the MS Text Translator API then this page shou
 
 There will be two API Keys listed here, and you should copy and paste these keys into the same document you stored your Twitter API keys in as we will be using these later.
 
+
+[Back to top](#this-guide-will-explain)
 # How to use Twit
 
 ### Getting Twit up and running
@@ -107,16 +114,22 @@ There will be two API Keys listed here, and you should copy and paste these keys
 
 ### Parsing data from a JSON response
 
+
+[Back to top](#this-guide-will-explain)
 # How to use MSTranslator
 
 ### Get MSTranslator up and running
 
 ### Structure of a text translation request
 
+
+[Back to top](#this-guide-will-explain)
 # Replying to tweets
 
 ### Pulling text from tweets to translate
 
+
+[Back to top](#this-guide-will-explain)
 # Scheduling tweets
 
 ### The End
@@ -124,3 +137,6 @@ There will be two API Keys listed here, and you should copy and paste these keys
 - [Twitter API Documentation](https://dev.twitter.com/overview/api)
 - [Twit Node Client Documentation](https://github.com/ttezel/twit)
 - [MSTranslator Documentation](https://github.com/nanek/mstranslator)
+
+
+[Back to top](#this-guide-will-explain)
