@@ -25,9 +25,22 @@ First thing's first, we need to create a Twitter account for our bot. **[Signing
     <img src="jcarrabino.github.io/pics/twitterSignUp.png">
 </p>
 
-
-
 ### Get your own Twitter API Key
+Now that we've created a Twitter account for out bot, the next thing we need to do is to create an application for our bot. All you need to do is be logged into twitter and click on the following link, **[create a new app](https://apps.twitter.com/)**. 
+
+This should redirect you to Twitter's application management page,
+
+<p align="center">
+    <img src="jcarrabino.github.io/pics/createAppTwit.png">
+</p>
+
+Now, click on the button that says "Create New App" which will send you to the following page,
+
+<p align="center">
+    <img src="jcarrabino.github.io/pics/createApp.png">
+</p>
+
+Here you will fill out all of the required fields in order to create your new Twitter app. If you are unsure of what to use for your website, you can just put your Twitter bot's profile page for now, which should look like this, "https://twitter.com/<Your-Twitter-Bot-UserName>"
 
 # Get your MSTranslator API Key
 
