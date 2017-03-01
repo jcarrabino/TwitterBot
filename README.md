@@ -143,7 +143,7 @@ Let's say that I want to GET the most popular tweet send out by Donald Trump. I 
 // find latest tweet according the query 'q' in params
 var params = {
     q: 'from:realDonaldTrump',  // REQUIRED
-    result_type: 'recent',
+    result_type: 'popular',
     count: '1'
 }
 // for more parametes, see: https://dev.twitter.com/rest/reference/get/search/tweets
@@ -154,7 +154,7 @@ Twitter.get('search/tweets', params, function(err, data, response){
       console.log(response);
  });
 ```
-Twit's get function allows us to send an API request to Twitter, and is structured as `Twitter.get(path,[params], callback)`.
+Twit's get function allows us to send an API request to Twitter, and is structured as `Twitter.get(path, [params], callback)`.
 
 The first parameter, path, specifies the endpoint to hit. So by setting path to "search/tweets" we are telling the request to search through the tweets at Twitter's API endpoint. 
 
@@ -162,8 +162,33 @@ The second parameter, [params], defines the parameters of our request. This is u
 
 The last parameter is the callback function. Every method in the Twit library has a callback function passed as the last parameter. The callback function is formatted as such, `function(err, data, response)`. Where "err" will log any error messages if a bad request was sent, "data" will contain the parsed data received from Twitter, and "response" is the http.IncomingMessage received from Twitter.
 
+The actual request that gets sent to Twitter from our Twitter.get method will contain the following information,
 
-### TheJSON Response
+```
+...
+GET /1.1/search/tweets.json?q=from%3ArealDonaldTrump&result_pe=popular&count=1 HTTP/1.1\r\n
+Authorization: 
+OAuth oauth_consumer_key="",
+    oauth_signature_method="HMAC-SHA1",
+    oath_timestamp="1488383469",
+    oauth_token="",
+    oauth_nonce="",
+    oauth_version="1.0",
+    oauth_signature="%3D"
+Host: api.twitter.com
+X-Target-URI: https://api.twitter.com
+Connection: close,
+...
+```
+Note that all keys were removed from the above data. Also, these requests are more complicated because Twitter now requires OAuth keys for security reasons, but if that were not the case we could make the same request by passing our GET request using the following URL,
+`https://api.twitter.com/1.1/search/tweets.json?q=from%3ArealDonaldTrump&result_pe=popular&count=1.json`
+Let's examine this a bit more closely,
+- `https://api.twitter.com`: This is the API's base URL, the base address of the host server we're addressing.
+- `/1.1`: This is the version of OAuth currently used by Twitter
+- `/search/tweets.json`: This is the path parameter we sent in our call to get. It also has `.json` added to the end of it to indicate the type of data we'll be getting back
+- `?q=from%3ArealDonaldTrump&result_pe=popular&count=1`: Lastly this is the query we constructed from the `[params]` passed to the get method.
+
+### The JSON Response
 
 After calling the get function with a valid request, all of the parsed JSON data we want will be located in the "data" object of the callback function. 
 
@@ -214,6 +239,9 @@ Returns the following parsed JSON object,
 ```
 
 ### Parsing data from a JSON response
+Wow, that JSON response is long and kind of intimidating, but don't worry, there are only a few pieces of data we will be using from it.
+
+
 
 <br></br>
 [Back to top](#this-guide-will-explain)
