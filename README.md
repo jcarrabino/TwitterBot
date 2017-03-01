@@ -160,7 +160,7 @@ The first parameter, path, specifies the endpoint to hit. So by setting path to 
 
 The second parameter, [params], defines the parameters of our request. This is used to construct the API's request URL. The only required parameter in params is "q" which is the query parameter. The above request is searching specifically for tweets from realDonaldTrump. 
 
-The last parameter is the callback function. Every method in the Twit library has a callback function passed as the last parameter. The callback function is formatted as such, `function(err, data, response)`. Where "err" will log any error messages if a bad request was sent, "data" will contain the parsed data received from Twitter, and "response" is the http.IncomingMessage received from Twitter.
+The last parameter is the callback function. These callback functions use AJAX or Asynchronous JavaScript and XML. AJAX allows us to grab data from the Twitter API. Every method in the Twit library has a callback function passed as the last parameter. The callback function is formatted as such, `function(err, data, response)`. Where "err" will log any error messages if a bad request was sent, "data" will contain the parsed data received from Twitter, and "response" is the http.IncomingMessage received from Twitter.
 
 The actual request that gets sent to Twitter from our Twitter.get method will contain the following information,
 
@@ -198,7 +198,7 @@ Twitter.get('search/tweets', params, function(err, data, response){
       console.log(data);
  });
 ```
-Returns the following parsed JSON object,
+Returns the following Twitter JSON object and saves it in `data`,
 ```javascript
 { statuses:
    [ { created_at: 'Wed Mar 01 01:30:49 +0000 2017',
@@ -239,17 +239,56 @@ Returns the following parsed JSON object,
 ```
 
 ### Parsing data from a JSON response
-Wow, that JSON response is long and kind of intimidating, but don't worry, there are only a few pieces of data we will be using from it.
+Wow, that JSON response is long and kind of intimidating, but don't worry, there are only a few pieces of data we will be using from it. For the purposes of our Twitter bot, we want to pull the `text` from a tweet for translation, as well as the original tweeter's `id_str` and `screen_name` in order to reply to the original tweet with our translated tweet. 
 
+Fortunately, these are easily accessible within our `data` object. Let's modify our get method's callback function in order to store the `id_str`, `screen_name`, and `text` into our own variables.
 
+```javascript
+var params = {
+    q: 'from:realDonaldTrump',  // REQUIRED
+    result_type: 'popular',
+    count: '1'
+};
+
+//declare variables to store the data we need
+var orig_text = '';
+var user_id = '';
+var user_sn = '';
+
+Twitter.get('search/tweets', params, function(err, data, response){
+      orig_text = data.statuses.text
+      user_id = data.statuses.id_str
+      user_sn = data.statuses.user.screen_name;
+ });
+```
+So now we have a good idea of what kind of data we need to get and how to retrieve the data you need from the JSON object returned by Twitter.
 
 <br></br>
 [Back to top](#this-guide-will-explain)
 # How to use MSTranslator
 
 ### Get MSTranslator up and running
+You can install MS Translator by running, `npm install mstranslator`, in the command line. Once MSTranslator finishes installing you should create a new javascript file titled `MSKey.js` within your bot's directory. This is where we will store our MSText Translator API Keys. It should be noted that a subscription to the MS Text Translator gives you two API Keys, however each app you make only requires one key, so only use the first key for this part. The contents of `MSKey.js` should look like this,
+```javascript
+module.exports = {
+    api_key:"YOUR_KEY_1" 
+}
+```
+When you have finished this go back to `bot.js`. Now that we have our keys stored in a configuration file we can initialize an MSTranslator object by executing the following lines of code,
+```javascript
+//Set up MSTranslator
+var MsTranslator = require('mstranslator');
 
-### Structure of a text translation request
+//Include key in MSKey.js
+var MSconfig = require('./MSkey.js');
+
+//Initialize MSTranslator object
+var client = new MsTranslator(MSconfig, true);
+```
+Now that we've initialized our MSTranslator object we can access the calls provided to us by the MSTranslator library. At this point we are ready to make test calls to send/receive data from MSTranslator. 
+
+### Translating text
+For our purposes we will only becovering MSTranslator's `translate` method. We will be calling this method with our MSTranslator object, which we have defined as `client`. The 
 
 <br></br>
 [Back to top](#this-guide-will-explain)
