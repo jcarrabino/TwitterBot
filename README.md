@@ -106,7 +106,7 @@ There will be two API Keys listed here, and you should copy and paste these keys
 ### Getting Twit up and running
 Before we can make calls to Twit, we will need to get our local environment up and running. For this guide it is assumed that you have node.js installed. If that is not the case, you can follow **[this guide](https://docs.npmjs.com/getting-started/installing-node)** in order to install node on your own. 
 
-The first thing we need to do is to create a new directory(an empty folder) where the Twitter Bot's source code wil be stored. We will be using the Twit library, which is a Twitter API Client made for node.js. Twit contains a set of precompiled cocmmands that will allow us to more easily interact with Twitter's API.
+The first thing we need to do is to create a new directory(an empty folder) where the Twitter Bot's source code wil be stored. We will be using the Twit library, which is a Twitter API Client made for node.js. Twit contains a set of precompiled commands that will allow us to more easily interact with Twitter's API.
 
 You can install Twit by running, `npm install twit`, in the command line. Once Twit finishes installing create a new javascript file inside the Twitter bot's directory, for simplicity sake, let's call it `bot.js`. This is where we will be writing the code for our Twitter bot. 
 
@@ -119,7 +119,7 @@ module.exports = {
     access_token_secret : ""
 }
 ```
-You should then copy and pasy your four Twitter Keys/Tokens inside the double quotes next to their corresponding variable names. When you have finished this go back to `bot.js`. Now that we have our keys stored in a configuration file we can initialize a Twit object by executing the following lines of code,
+You should then copy and paste your four Twitter Keys/Tokens inside the double quotes next to the corresponding variable names. When you have finished this go back to `bot.js`. Now that we have our keys stored in a configuration file we can initialize a Twit object by executing the following lines of code,
 ```javascript
 //Set up Twitter 
 var twit = require('twit');
@@ -130,11 +130,11 @@ var config = require('./config.js');
 //Initialize Twit object
 var Twitter = new twit(config);
 ```
-Now that we've initialized our Twit object we can access the calls provided to us by the Twit library. At this point we are ready to make test calls to send/receive data from Twitter. 
+Now that we've initialized our Twit object we can access the methods provided to us by the Twit library. At this point we are ready to make test calls to send/receive data from Twitter. 
 
 
 ### Structure of an API request
-Let's say that I want to GET the most popular tweet send out by Donald Trump. I could write something like this,
+Let's say that I want to GET the most popular tweet sent out by Donald Trump. I could write something like this,
 
 ```javascript
 // find latest tweet according the query 'q' in params
@@ -153,16 +153,15 @@ Twitter.get('search/tweets', params, function(err, data, response){
 ```
 Twit's get function allows us to send an API request to Twitter, and is structured as `Twitter.get(path, [params], callback)`.
 
-The first parameter, path, specifies the endpoint to hit. So by setting path to "search/tweets" we are telling the request to search through the tweets at Twitter's API endpoint. 
+The first parameter, `path`, specifies the endpoint to hit. So by setting path to "search/tweets" we are telling the request to search through the tweets at Twitter's API endpoint. 
 
-The second parameter, [params], defines the parameters of our request. This is used to construct the API's request URL. The only required parameter in params is "q" which is the query parameter. The above request is searching specifically for tweets from realDonaldTrump. 
+The second parameter, `[params]`, defines the parameters of our request. This is used to construct the API's request URL. The only required parameter in params is "q" which is the query parameter. The above request is searching specifically for tweets from realDonaldTrump. 
 
-The last parameter is the callback function. These callback functions use AJAX or Asynchronous JavaScript and XML. AJAX allows us to grab data from the Twitter API. Every method in the Twit library has a callback function passed as the last parameter. The callback function is formatted as such, `function(err, data, response)`. Where "err" will log any error messages if a bad request was sent, "data" will contain the parsed data received from Twitter, and "response" is the http.IncomingMessage received from Twitter.
+The last parameter is the `callback` function. These callback functions use AJAX or Asynchronous JavaScript and XML. AJAX allows us to grab data from the Twitter API. Every method in the Twit library has a callback function passed as the last parameter. The callback function is formatted as such, `function(err, data, response)`. Where "err" will log any error messages if a bad request was sent, "data" will contain the parsed data received from Twitter, and "response" is the http.IncomingMessage received from Twitter.
 
 The actual request that gets sent to Twitter from our Twitter.get method will contain the following information,
 
 ```
-...
 GET /1.1/search/tweets.json?q=from%3ArealDonaldTrump&result_pe=popular&count=1 HTTP/1.1\r\n
 Authorization: 
 OAuth oauth_consumer_key="",
@@ -174,19 +173,18 @@ OAuth oauth_consumer_key="",
     oauth_signature="%3D"
 Host: api.twitter.com
 X-Target-URI: https://api.twitter.com
-Connection: close,
-...
+Connection: close
 ```
-Note that all keys were removed from the above data. Also, these requests are more complicated because Twitter now requires OAuth keys for security reasons, but if that were not the case we could make the same request by passing our GET request using the following URL,
+Note that all keys were removed from the above data. Also, these requests are more complicated because Twitter now requires OAuth keys for security reasons, but if that were not the case we could make the same request by passing our GET request via URL.
+
+Let's examine what a potential GET request sent via URL would look like a bit more closely,
 `https://api.twitter.com/1.1/search/tweets.json?q=from%3ArealDonaldTrump&result_pe=popular&count=1.json`
-Let's examine this a bit more closely,
 - `https://api.twitter.com`: This is the API's base URL, the base address of the host server we're addressing.
 - `/1.1`: This is the version of OAuth currently used by Twitter
 - `/search/tweets.json`: This is the path parameter we sent in our call to get. It also has `.json` added to the end of it to indicate the type of data we'll be getting back
 - `?q=from%3ArealDonaldTrump&result_pe=popular&count=1`: Lastly this is the query we constructed from the `[params]` passed to the get method.
 
 ### The JSON Response
-
 After calling the get function with a valid request, all of the parsed JSON data we want will be located in the "data" object of the callback function. 
 
 So the function,
@@ -225,14 +223,14 @@ Returns the following Twitter JSON object and saves it in `data`,
        possibly_sensitive: false,
        lang: 'en' } ],
   search_metadata:
-   { completed_in: 0.012,
+   [{ completed_in: 0.012,
      max_id: 0,
      max_id_str: '0',
      next_results: '?max_id=836750538943377407&q=from%3ArealDonaldTrump&count=1&include_entities=1&result_type=popular',
      query: 'from%3ArealDonaldTrump',
      count: 1,
      since_id: 0,
-     since_id_str: '0' } }
+     since_id_str: '0' }] }
 ```
 
 ### Parsing data from a JSON response
