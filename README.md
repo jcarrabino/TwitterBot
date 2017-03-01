@@ -63,13 +63,38 @@ Notice the tabs listed at the top right under your app's name. Now click the thi
     <img src="jcarrabino.github.io/pics/TwitAPIToken.png">
 </p>
 
+At this point you should take a moment to copy and paste your API Key, API Secret, Access Token, and Access Token Secret into a separate text document. You will need to use these later on, as these are the four keys you will need to access and work with Twitter's API.
+
 # Get your MSTranslator API Key
 
 ### Signing up for an account on Windows Azure Marketplace
+Now that we have our Twitter API Keys/Tokens we can start working on getting our own MS Text Translator API Keys. In order to access Microsoft's Translator API we will need to create a Microsoft Azure account. If you already have a Microsoft affiliated email account then you can **[sign in](http://portal.azure.com/)** to Microsoft Azure with that. If not, then you can sign up for a Microsoft Azure account, **[here](http://azure.com/)**, by clicking on the link that says "Free Account" in the top-right corner.
 
 ### Subscribe to the Microsoft Translator API
+Once you're signed into Azure, go to the **[Cognitive Services](https://portal.azure.com/#create/Microsoft.CognitiveServices)** section. This should bring you to the following page,
 
-### Register your application on Windows Azure Marketplace
+<p align="center">
+    <img src="jcarrabino.github.io/pics/textAPISignUp.png">
+</p>
+
+Under "API Type" select "Translator Text API" and in the "Pricing Tier" section select the "F0" option to use the free subscription for the MS Text Translator API. Your Microsoft Text Translato API subscription will begin immediately after completing the above form and clicking on the "Create" button.
+
+### Accessing your MSTranslator API Key
+Now that we've successfully subscribed to Microsot Text Translator its time to head back to the **[Azure Portal](http://portal.azure.com/)** in order to access our API Keys.
+
+Once on the Azure Portal Dashboard, navigate to the panel on the far left and click on the link that says "All Resources." This will take to the following page,
+
+<p align="center">
+    <img src="jcarrabino.github.io/pics/allRes.png">
+</p>
+
+If you successfully signed up for the MS Text Translator API then this page should display the Cognitive Services account that you just created. Click on the link under the "Name" column to go to your Cognitive Services account overview page. Once there you will need to scroll down the center column to the "Resource Management" section and click on the link that says "Keys" which will bring you to the following page,
+
+<p align="center">
+    <img src="jcarrabino.github.io/pics/textKeys.png">
+</p>
+
+There will be two API Keys listed here, and you should copy and paste these keys into the same document you stored your Twitter API keys in as we will be using these later.
 
 # How to use Twit
 
