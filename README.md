@@ -16,7 +16,7 @@ Let's think of an analogy. Everyday I drive a car and through some miracle of en
 
 This is basically what we will be doing when using Twitter's API. We don't necessarily care about the deep inner workings of Twitter. We will just be using its API which will allow us to use Twitter's platform in our own programs.
 
-
+<br></br>
 [Back to top](#this-guide-will-explain)
 # Get your Twitter API Key
 
