@@ -25,7 +25,6 @@ First thing's first, we need to create a Twitter account for our bot. **[Signing
     <img src="jcarrabino.github.io/pics/twitterSignUp.png">
 </p>
 
-### Get your own Twitter API Key
 Now that we've created a Twitter account for out bot, the next thing we need to do is to create an application for our bot. All you need to do is be logged into twitter and click on the following link, **[create a new app](https://apps.twitter.com/)**. 
 
 This should redirect you to Twitter's application management page,
@@ -40,7 +39,29 @@ Now, click on the button that says "Create New App" which will send you to the f
     <img src="jcarrabino.github.io/pics/createApp.png">
 </p>
 
-Here you will fill out all of the required fields in order to create your new Twitter app. If you are unsure of what to use for your website, you can just put your Twitter bot's profile page for now, which should look like this, "https://twitter.com/<Your-Twitter-Bot-UserName>"
+Here you will fill out all of the required fields in order to create your new Twitter app. If you are unsure of what to use for your website, you can just put your Twitter bot's profile page for now, which should look like this, "twitter.com/(Your-Twitter-Bot-UserName)"
+
+### Get your own Twitter API Key
+Now that we have an account and have created our application, we need to find our Twitter API Key. Keep in mind that each Twitter app has a unique API key used to access Twitter's API. With that being said, you should keep your API Key secret, as it is connected to you and we cannot make API calls to Twitter without a valid key.
+
+First thing you need to do is head back to the application management page, **[here](https://apps.twitter.com/)**. Notice how there is a new link on this page for the Twitter app that you just created,
+
+<p align="center">
+    <img src="jcarrabino.github.io/pics/yourApp.png">
+</p>
+
+Click on the link with your app's name. This will take you to your app's home page, which will look like this,
+
+<p align="center">
+    <img src="jcarrabino.github.io/pics/appHome.png">
+</p>
+
+Notice the tabs listed at the top right under your app's name. Now click the third tab in that is titled "Keys and Access Tokens" which will take you to the page with your API keys and access tokens. It should look like this,
+
+<p align="center">
+    <img src="jcarrabino.github.io/pics/TwitAPIKey.png">
+    <img src="jcarrabino.github.io/pics/TwitAPIToken.png">
+</p>
 
 # Get your MSTranslator API Key
 
