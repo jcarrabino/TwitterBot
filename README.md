@@ -262,7 +262,7 @@ So now we have a good idea of what kind of data we need to get and how to retrie
 [Back to top](#this-guide-will-explain)
 # How to use MSTranslator
 ### Get MSTranslator up and running
-You can install MS Translator by running, `npm install mstranslator`, in the command line. Once MSTranslator finishes installing you should create a new javascript file titled `MSKey.js` within your bot's directory. This is where we will store our MSText Translator API Keys. It should be noted that a subscription to the MS Text Translator gives you two API Keys, however each app you make only requires one key, so only use the first key for this part. The contents of `MSKey.js` should look like this,
+You can install MS Translator by running, `npm install mstranslator`, in the command line. Once MSTranslator finishes installing you should create a new javascript file titled `MSKey.js` within your bot's directory. This is where we will store our MS Text Translator API Key. It should be noted that a subscription to the MS Text Translator gives you two API Keys, however each app you make only requires one key, so only use the first key for this part. The contents of `MSKey.js` should look like this,
 ```javascript
 module.exports = {
     api_key:"YOUR_KEY_1" 
@@ -288,9 +288,9 @@ Let's say we wanted to translate a text string from English to Russian,
 
 ```
 var params = {
-    text: "In Soviet Russia...",
+    text: "In Soviet Russia...",    //REQUIRED
     from: 'en',
-    to: 'ru'
+    to: 'ru'    //REQUIRED
 };
 
 client.translate(params, function(err, data) {             
