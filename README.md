@@ -41,6 +41,7 @@ Now, click on the button that says "Create New App" which will send you to the f
 
 Here you will fill out all of the required fields in order to create your new Twitter app. If you are unsure of what to use for your website, you can just put your Twitter bot's profile page for now, which should look like this, "twitter.com/(Your-Twitter-Bot-UserName)"
 
+[Back to top](#this-guide-will-explain)
 ### Get your own Twitter API Key
 Now that we have an account and have created our application, we need to find our Twitter API Key. Keep in mind that each Twitter app has a unique API key used to access Twitter's API. With that being said, you should keep your API Key secret, as it is connected to you and we cannot make API calls to Twitter without a valid key.
 
