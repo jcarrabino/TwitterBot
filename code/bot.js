@@ -11,8 +11,14 @@ var client = new MsTranslator(MSconfig, true);
 //Set up Node-Scheduler for Automation
 var schedule = require('node-schedule');
 
+//Set rules for retweet schedule
+var rule = new schedule.RecurrenceRule();
+rule.minute = 15;
+rule.minute = 30;
+rule.minute = 45;
 
-var retweet = function() {
+//Call on retweet function based on scheduler's rules
+var trollBot = schedule.scheduleJob(rule, function() {
     // find latest tweet according the query 'q' in params
     var params = {
         q: 'from:realDonaldTrump',  // REQUIRED
@@ -58,29 +64,18 @@ var retweet = function() {
                 
                 // Tell Twitter to reply to User with translated tweet
                 Twitter.post('statuses/update', {in_reply_to_status_id: retweetID, 
-                    status: 'Translation: ' + twitText + ' @' + name}, function(err, response) {
-                    if (response) {
-                        console.log('Retweeted!!!');
-                    }
-                    // if there was an error while tweeting
-                    if (err) {
-                        console.log(err);
-                    }
+                status: 'Translation: ' + twitText + ' @' + name}, function(err, response) {
+                if (response) 
+                    console.log('Retweeted!!!');
+                
+                // if there was an error while tweeting
+                if (err) 
+                    console.log(err);
                 });
             });
         }
         // if unable to Search a tweet
-        else {
+        else 
           console.log('Something went wrong while SEARCHING...');
-        }
     });
-};
-
-
-//Set rules for retweet schedule
-var rule = new schedule.RecurrenceRule();
-rule.minute = 0;
-rule.hour = 9;
-
-//Call on retweet function based on scheduler's rules
-var trollBot = schedule.scheduleJob(rule, retweet());
+});
