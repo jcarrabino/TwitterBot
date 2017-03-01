@@ -288,7 +288,28 @@ var client = new MsTranslator(MSconfig, true);
 Now that we've initialized our MSTranslator object we can access the calls provided to us by the MSTranslator library. At this point we are ready to make test calls to send/receive data from MSTranslator. 
 
 ### Translating text
-For our purposes we will only becovering MSTranslator's `translate` method. We will be calling this method with our MSTranslator object, which we have defined as `client`. The 
+For our purposes we will only be covering MSTranslator's `translate` method. We will be calling this method with our MSTranslator object, which we have defined as `client`. 
+
+Let's say we wanted to translate a text string from English to Russian,
+
+```
+var params = {
+    text: "In Soviet Russia...",
+    from: 'en',
+    to: 'ru'
+};
+
+client.translate(params, function(err, data) {             
+    var twitText = JSON.stringify(data);
+};
+```
+MSTranslator's translate method allows us to send an API request to MS Text Translator, and is structured as `client.translate([params], callback)`. After the call to translate made above, `twitText = в Советской России ...`
+
+The [params] object defines the parameters of our request. This is used to construct the API's request URL. The only required parameter in params are "text" and "to". After calling this function, twitText will be the Russian translation of the string,  
+
+The last parameter is the callback function. These callback functions use AJAX or Asynchronous JavaScript and XML. AJAX allows us to grab data from the MSTranslator API. Every method in the MSTranslator library has a callback function passed as the last parameter. The callback function is formatted as such, `function(err, data)`. Where "err" will log any error messages if a bad request was sent and "data" will contain a JSON response containing the translated text.
+
+So now that you know how to search for specific tweets, grab the data you need from them, and translate strings, it is time to tie everything we've covered together and create a bot capable of replying to tweets with translated text.
 
 <br></br>
 [Back to top](#this-guide-will-explain)
