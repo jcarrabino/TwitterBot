@@ -317,7 +317,7 @@ So now that you know how to search for specific tweets, grab the data you need f
 
 ### Pulling text from tweets to translate
 
-<br></br>
+<br>
 [Back to top](#this-guide-will-explain)
 # Scheduling tweets
 
