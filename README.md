@@ -397,8 +397,8 @@ Let's look at those error logs again. Until now we've just been calling, `consol
 ```javascript
  { ["Error": "Status is a duplicate."]
    "messag"e: "Status is a duplicate.",
-   "code": "187",
-   'allErrors": [ { "code": 187, "message": "Status is a duplicate." } ],
+   "code": 187,
+   "allErrors": [ { "code": 187, "message": "Status is a duplicate." } ],
    "twitterRepl"y: { "errors": [ [Object] ] },
    "statusCode": 403 }
 ```
