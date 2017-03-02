@@ -321,9 +321,9 @@ So now that you know how to search for specific tweets, grab the data you need f
     <A href="https://jcarrabino.github.io/#this-guide-will-explain">Back to top</A>
 </p>
 # Replying to Tweets
-At this point we've already discussed how to parse out the data we need from a Twitter API response, but that is only useful for GETting data. What we need to do now is use the data we've retrieved to POST a status update replying to the original tweet.
+At this point we've already discussed how to parse out the data we need from a Twitter API response, but that is only useful for getting data. What we need to do now is use the data we've retrieved to POST a status update replying to the original tweet.
 
-There are a couple of things to keep in mind before POSTing a reply to Twitter. First, is that we need to ensure that the translated tweet has enough room to concatenate with the original poster's username, as well as any other text you wish to add to it. For my bot, I want to add "Translation: " to the beginning of the tweet, put double quotes around the translated text, and in order to make my tweet a reply it needs to end in " @realDonaldTrump". That is a total of 32 characters. Therefore I need to ensure that My bot can ensure that each translated tweet is less than or equal to 108 characters. We can add a simple conditional statement and formatting loop in order to meet these conditions,
+There are a couple of things to keep in mind before POSTing a reply to Twitter. First, is that we need to ensure that the translated tweet has enough room to concatenate with the original poster's username, as well as any other text you wish to add to it. For my bot, I want to add "Translation: " to the beginning of the tweet, put double quotes around the translated text, and in order to make my tweet a reply to one of Donald Trump's tweet it needs to end in " @realDonaldTrump". That is a total of 32 characters. Therefore I need my bot to ensure that each translated tweet is less than or equal to 108 characters due to Twitter's 140 character limit. We can add a simple conditional statement and formatting loop in order to meet these conditions,
 
 ```javascript
 // Russian text seems to add characters, this loop ensures total 
@@ -336,9 +336,9 @@ if (twitText.length > 108) {
 }
 ```
 
-This section of code will check if the translated tweet's length is greater than 108, and if so it will trim off the last word of the string until it is less than or equal to 108 characters long.
+This section of code will check if the translated tweet's length is greater than 108 characters, and if so it will trim off the last word of the string until it is less than or equal to 108 characters long.
 
-The second thing we need to do is post the translated tweet as a reply to the original tweet. Fortunately Twit's post method is structured similarly to its get method, `Twitter.post(path, [params], callback)`. Whenever we are posting a tweet, our path variable needs to be set to, `statuses/update`. As for the params object, all we need to put here are `in_reply_to_status_id`, which is the `id_str` of the original tweet's author, and the `status`, which is the text content of the tweet we wish to post.
+The second thing we need to do is post the translated tweet as a reply to the original tweet. Fortunately Twit's post method is structured similarly to its get method, `Twitter.post(path, [params], callback)`. Whenever we are posting a tweet, our path variable needs to be set to, `statuses/update`. As for the params object, all we need to put in here are `in_reply_to_status_id`, which is the `id_str` of the original tweet's author, and the `status`, which is the text content of the tweet we wish to post as a reply.
 
 After running the conditional formatting loop, which formats the string contents of `twitText`, we can then send out our reply tweet with the following statement,
 
@@ -356,37 +356,37 @@ status: 'Translation: ' + twitText + '" @' + name}, function(err, data, response
     }
 });
 ```
-Again, since this is formatted the same as the Twitter.get method, the `err` object in the callback function will log any error messages received by Twitter if it could not post the tweet. So in the line, `if(!err)`, we are ensuring that the tweet was successfully posted before logging `console.log('Successfully tweeted with string truncation!!!');`. Now that we can run queries for tweets, pull the information we need from Twitter's API response, translate the text, and post it as a reply to the original tweeter, we can start focusing on how to automate our bot.
+Again, since this is formatted the same as the Twitter.get method, the `err` object in the callback function will log any error messages received by Twitter if it could not post the tweet. So with the line, `if(!err)`, we are ensuring that the tweet was successfully posted before logging `'Successfully tweeted with string truncation!!!'`. Now that we can run queries for tweets, pull the information we need from Twitter's API response, translate the text, and post it as a reply to the original tweeter, we can start focusing on how to automate our bot.
 
 <br>
 <p align="center">
     <A href="https://jcarrabino.github.io/#this-guide-will-explain">Back to top</A>
 </p>
 # Scheduling Tweets
-In order to schedule when to send out tweets we will need the node.js add-on, Node Schedule, which can be installed by executing `npm install node-schedule` in the command line. Node Schedule allows us to use time-based scheduling in order to allow our bot to GET and POST tweets at predetermined times or dates using cron style formatting(which we will go over later in this section). 
+In order to schedule when to send out tweets we will need the node.js add-on, Node Schedule, which can be installed by executing `npm install node-schedule` in the command line. Node Schedule allows us to use time-based scheduling in order to allow our bot to GET and POST tweets at predetermined times or dates using cron style formatting(which we will cover later in this section). 
 
-Similar to MS Text Translator and Twit, a node-schdule object needs to be initialized at the beginning of our `bot.js` file. So underneath where MS Text Translator and Twit are set up we will need to add the following chunk of code,
+Similar to MS Text Translator and Twit, a Node Schedule object needs to be initialized at the beginning of our `bot.js` file. So underneath where MS Text Translator and Twit are set up we will need to add the following chunk of code,
 
 ```javascript   
 //Set up Node Schedulr for Automation
 var schedule = require('node-schedule');
 ```
-With our node-schedule object initialized, we can start determining the rules for automation. Lets say I want to search for Donald Trump's most recent tweet every 30 minutes. In order to do this we will need to call on Node Schedule's scheduleJob method, which looks like this `var twitBot = schedule.scheduleJob('* * * * *', function(){...});`. 
+With our Node Schedule object initialized, we can start determining the rules for automation. Lets say I want to search for a new tweet from Donald Trump to reply to every 30 minutes. In order to do this we will need to call on Node Schedule's scheduleJob method, which looks like this `var twitBot = schedule.scheduleJob('* * * * * *', function(){...});`. 
 
-Wait a second, that first parameter, '* * * * *', looks really funny, what could that possibly mean? Well, this is the cron-style formatting I mentioned earlier on in the section. Here is what each asterisk means, 
+Wait a second, that first parameter, '* * * * * *', looks really funny, what could that possibly mean? Well, this is the cron-style formatting I mentioned earlier on in the section. Here is what each asterisk means, 
 
 <p align="center">
     <img src="jcarrabino.github.io/pics/cron.png">
 </p>
 
-So, if we wanted to schedule our bot to search for and reply to tweets every 30 minutes, that cron parameter would look like this, `'* /30 * * * *'`.
+So, if we wanted to schedule our bot to search for and reply to new tweets every 30 minutes, that first parameter would look like this, `'* /30 * * * *'`.
 
 As for the second parameter, `function(){...}`, inside those braces is where our functions to search for tweets, translate the text, and reply to the original poster would go. 
 
 ### Cleaner Error Logs
-Right now our error logs are returning the entire error object, not all of which is necessary. It also does not have a way to add a timestamp to each log file. To fix this we can install one final node.js add-on called Console Timestamp by running, `npm install console-timestamp` in the command line. 
+Right now our error logs are returning the entire Twitter Error Response object, not all of which is necessary. It also does not have a way to add a timestamp to each log file. To fix this we can install one final node.js add-on called Console Timestamp by running, `npm install console-timestamp` in the command line. 
 
-Like with every add on, we need to set up a timestamp object at the beginning of our bot.js script. We can do this by executing the following line of code,
+Like with every add on, we need to set up a timestamp object at the beginning of our `bot.js` script. We can do this by executing the following line of code,
 
 ```javascript
 //Set up Timestamp
@@ -402,12 +402,12 @@ Let's look at those error logs again. Until now we've just been calling, `consol
   twitterReply: { errors: [ [Object] ] },
   statusCode: 403 }
 ```
-This is okay, but I think we can do better. The only things that would be very useful to pull from this would be `err.message` and `err.code`. On top of that it would be nice to have a timestamp output to our error logs as well. We can do this by replacing each call to `console.log(err);` with,
+This is okay, but I think we can do better. The only things that would be very useful to pull from this would be `err.message` and `err.code`. On top of that it would be nice to have a timestamp associated with our error logs too. We can do this by replacing each call to `console.log(err);` with,
 
 ```javascript
 console.log(timestamp());
-console.log('Error Message : ' + err.message, '\nCode: '+err.code);
-console.log('\n');
+console.log('\nError Message : ' + err.message, '\nCode: '+err.code);
+console.log('\n\n');
 ```
 Now each time an error is logged it's output will look like this,
 ```
@@ -421,7 +421,7 @@ Code: 187
     <A href="https://jcarrabino.github.io/#this-guide-will-explain">Back to top</A>
 </p>
 # Tying it all Together
-So now we have all of the tools in our arsenal to make a fully functioning Twitter bot, we just have to incorporate everything covered up until now into one cohesive script.
+Now that we have all of the tools in our arsenal to make a fully functioning Twitter bot, we just need to incorporate everything covered in this guide into one cohesive script.
 
 Here is what the finalized version of your bot.js script should look like,
 ```javascript
@@ -531,7 +531,7 @@ var trollBot = schedule.scheduleJob('*/30 * * * *', function(){
 });
 ```
 
-To run this script open up a command line from the directory containing your bot.js file. Once there you can execute this script by running, `node bot.js` in the command line. Note that launching the bot this way will only keep it running so long as you're actively running the script. However, we want this bot to continue running long after we exit out of our command line. To do this we need to run bot.js with forever, which is located in your node-modules folder where all your dependencies are installed. You can run your bot with forever by executing the following command, `./node_modules/forever/bin/forever start bot.js`.
+To run this script open up a command line and enter the directory containing your bot.js file. Once there you can execute this script by running, `node bot.js` in the command line. Note that launching the bot this way will only keep it running so long as you're actively running the script. However, we want this bot to continue running long after we exit out of our command line. To do this we need to run bot.js with forever, which is located in the node-modules folder where all your dependencies are installed. You can run your bot with forever by executing the following command, `./node_modules/forever/bin/forever start bot.js`.
 
 This will keep your bot running until you stop it by running, `./node_modules/forever/bin/forever stop bot.js`, or one of the other stop commands listed in **[Forever's](https://github.com/foreverjs/forever)** documentation.
 
