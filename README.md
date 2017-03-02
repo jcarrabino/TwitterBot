@@ -376,7 +376,7 @@ With our node-schedule object initialized, we can start determining the rules fo
 Wait a second, that first parameter, '* * * * *', looks really funny, what could that possibly mean? Well, this is the cron-style formatting I mentioned earlier on in the section. Here is what each asterisk means, 
 
 <p align="center">
-    <img src="jcarrabino.github.io/pics/textKeys.png">
+    <img src="jcarrabino.github.io/pics/cron.png">
 </p>
 
 So, if we wanted to schedule our bot to search for and reply to tweets every 30 minutes, that cron parameter would look like this, `'* /30 * * * *'`.
@@ -395,7 +395,7 @@ var timestamp = require('console-timestamp');
 
 Let's look at those error logs again. Until now we've just been calling, `console.log(err);`, which will return the following JSON object,
 
-```javascript
+```
 { [Error: Status is a duplicate.]
   message: 'Status is a duplicate.',
   code: 187,
@@ -412,7 +412,7 @@ console.log('Error Message : ' + err.message, '\nCode: '+err.code);
 console.log('\n');
 ```
 Now each time an error is logged it's output will look like this,
-```javascript
+```
 09:20:53
 Error Message : Status is a duplicate.
 Code: 187
@@ -541,7 +541,7 @@ If at any point you would like to view the logfile containing your bot's console
 
 Once you've got your script up and running, check out your Twitter bot's profile and sese what kind of antics it can get up to.
 <p align="center">
-    <img src="jcarrabino.github.io/pics/trollBot.png">
+    <img src="jcarrabino.github.io/pics/botPosts.png">
 </p>
 
 <br>
