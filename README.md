@@ -203,7 +203,7 @@ Twitter.get('search/tweets', params, function(err, data, response){
  });
 ```
 Returns the following Twitter JSON object and saves it in `data`,
-```javascript
+```json
 { statuses:
    [ { created_at: 'Wed Mar 01 01:30:49 +0000 2017',
        id: 836750538943377400,
@@ -232,14 +232,14 @@ Returns the following Twitter JSON object and saves it in `data`,
        possibly_sensitive: false,
        lang: 'en' } ],
   search_metadata:
-   [{ completed_in: 0.012,
+   [ completed_in: 0.012,
      max_id: 0,
      max_id_str: '0',
      next_results: '?max_id=836750538943377407&q=from%3ArealDonaldTrump&count=1&include_entities=1&result_type=popular',
      query: 'from%3ArealDonaldTrump',
      count: 1,
      since_id: 0,
-     since_id_str: '0' }] }
+     since_id_str: '0' ] }
 ```
 
 ### Parsing data from a JSON response
@@ -395,7 +395,7 @@ var timestamp = require('console-timestamp');
 
 Let's look at those error logs again. Until now we've just been calling, `console.log(err);`, which will return the following JSON object,
 
-```
+```json
 { [Error: Status is a duplicate.]
   message: 'Status is a duplicate.',
   code: 187,
