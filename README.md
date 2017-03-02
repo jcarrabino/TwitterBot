@@ -557,8 +557,3 @@ Once you've got your script up and running, check out your Twitter bot's profile
 - [Forever Documentation](https://github.com/foreverjs/forever)
 
 © *John Carrabino ~ jcarrabino13@gmail.com*
-
-<br>
-<p align="center">
-    <A href="https://jcarrabino.github.io/#this-guide-will-explain">Back to top</A>
-</p>
