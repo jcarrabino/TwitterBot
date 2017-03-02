@@ -8,11 +8,9 @@
 - [How to automate your Twitter bot](#replying-to-tweets)
 
 # What will the finished bot look like?
-===
 Our finished bot will be able to pull a tweet from Twitter based your specified search criteria, then reply to the original tweet's user with a translation of their tweet in whatever language you choose. 
 
 # What is a Web API?
-===
 API stands for Application Programming Interface. It's quite a mouthful and a fancy name for a relatively simple concept. In one sentence, an API is an interface that lets a program that you are writing control or access another program that some other person wrote. Now why would this be useful?
 
 Let's think of an analogy. Everyday I drive a car and through some miracle of engineering neither I nor the car spontaneously combusts. I also get to my destination without many problems. Though fascinating, I do not really care precisely how every aspect of my car works. I just want to drive and get to where I need to go. The interface of the car would be the steering wheel, gearshift, gas pedal, break pedal, and all of the other controls that let me drive my car. Now, say I wanted to teach my good robot friend, Killroy, how to drive a car. When building him I would not have to teach him about the inner workings of the car. I would just show him how to use the "interface" (the gas pedal, steering wheel etc...)!
@@ -22,7 +20,6 @@ This is basically what we will be doing when using Twitter's API. We don't neces
 <br>
 [Back to top](#this-guide-will-explain)
 # Get your Twitter API Key
-===
 ### Signing up for Twitter
 First thing's first, we need to create a Twitter account for our bot. **[Signing up](https://twitter.com/signup)** for a Twitter account is fairly simple and should onle take a couple of minutes. After clicking on the "Signing up" hyperlink you will be redirected to the following screen, 
 
@@ -75,7 +72,6 @@ At this point you should take a moment to copy and paste your API Key, API Secre
 <br>
 [Back to top](#this-guide-will-explain)
 # Get your MSTranslator API Key
-===
 ### Signing up for an account on Windows Azure Marketplace
 Now that we have our Twitter API Keys/Tokens we can start working on getting our own MS Text Translator API Keys. In order to access Microsoft's Translator API we will need to create a Microsoft Azure account. If you already have a Microsoft affiliated email account then you can **[sign in](http://portal.azure.com/)** to Microsoft Azure with that. If not, then you can sign up for a Microsoft Azure account, **[here](http://azure.com/)**, by clicking on the link that says "Free Account" in the top-right corner.
 
@@ -108,7 +104,6 @@ There will be two API Keys listed here, and you should copy and paste these keys
 <br>
 [Back to top](#this-guide-will-explain)
 # How to use Twit
-===
 ### Getting Twit up and running
 Before we can make calls to Twit, we will need to get our local environment up and running. For this guide it is assumed that you have node.js installed. If that is not the case, you can follow **[this guide](https://docs.npmjs.com/getting-started/installing-node)** in order to install node on your own. 
 
@@ -139,7 +134,6 @@ var Twitter = new twit(config);
 Now that we've initialized our Twit object we can access the methods provided to us by the Twit library. At this point we are ready to make test calls to send/receive data from Twitter. 
 
 # Structure of an API request
-===
 Let's say that I want to GET the most popular tweet sent out by Donald Trump. I could write something like this,
 
 ```javascript
@@ -266,8 +260,7 @@ So now we have a good idea of what kind of data we need to get and how to retrie
 
 <br>
 [Back to top](#this-guide-will-explain)
-# How to use MSTranslator
-===
+# How to use MS Text Translator
 ### Get MSTranslator up and running
 You can install MS Translator by running, `npm install mstranslator`, in the command line. Once MSTranslator finishes installing you should create a new javascript file titled `MSKey.js` within your bot's directory. This is where we will store our MS Text Translator API Key. It should be noted that a subscription to the MS Text Translator gives you two API Keys, however each app you make only requires one key, so only use the first key for this part. The contents of `MSKey.js` should look like this,
 ```javascript
@@ -315,13 +308,11 @@ So now that you know how to search for specific tweets, grab the data you need f
 <br>
 [Back to top](#this-guide-will-explain)
 # Replying to tweets
-===
 ### Pulling text from tweets to translate
 
 <br>
 [Back to top](#this-guide-will-explain)
 # Scheduling tweets
-===
 
 # Resources:
 - [Twitter API Documentation](https://dev.twitter.com/overview/api)
