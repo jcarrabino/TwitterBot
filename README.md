@@ -535,7 +535,7 @@ var trollBot = schedule.scheduleJob('*/30 * * * *', function(){
 
 To run this script open up a command line from the directory containing your bot.js file. Once there you can execute this script by running, `node bot.js` in the command line. Note that launching the bot this way will only keep it running so long as you're actively running the script. However, we want this bot to continue running long after we exit out of our command line. To do this we need to run bot.js with forever, which is located in your node-modules folder where all your dependencies are installed. You can run your bot with forever by executing the following command, `./node_modules/forever/bin/forever start bot.js`.
 
-This will keep your bot running until you stop it by running,`./node_modules/forever/bin/forever stop bot.js`, or one of the other stop commands listed in **[Forever's](https://github.com/foreverjs/forever)** documentation.
+This will keep your bot running until you stop it by running, `./node_modules/forever/bin/forever stop bot.js`, or one of the other stop commands listed in **[Forever's](https://github.com/foreverjs/forever)** documentation.
 
 If at any point you would like to view the logfile containing your bot's console logs, you can simply run, `./node_modules/forever/bin/forever logs`, which will return the name and location of your bot's logfile. 
 
