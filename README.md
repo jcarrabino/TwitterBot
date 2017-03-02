@@ -363,7 +363,7 @@ Again, since this is formatted the same as the Twitter.get method, the `err` obj
     <A href="https://jcarrabino.github.io/#this-guide-will-explain">Back to top</A>
 </p>
 # Scheduling tweets
-In order to schedule when to send out tweets we will need one final node.js add-on, called Node Schedule, which can be installed by executing `npm install node-schedule` in the command line. Node Schedule allows us to use time-based scheduling in order to allow our bot to GET and POST tweets at predetermined times or dates using cron style formatting. 
+In order to schedule when to send out tweets we will need the node.js add-on, Node Schedule, which can be installed by executing `npm install node-schedule` in the command line. Node Schedule allows us to use time-based scheduling in order to allow our bot to GET and POST tweets at predetermined times or dates using cron style formatting(which we will go over later in this section). 
 
 Similar to MS Text Translator and Twit, a node-schdule object needs to be initialized at the beginning of our `bot.js` file. So underneath where MS Text Translator and Twit are set up we will need to add the following chunk of code,
 
@@ -371,12 +371,178 @@ Similar to MS Text Translator and Twit, a node-schdule object needs to be initia
 //Set up Node Schedulr for Automation
 var schedule = require('node-schedule');
 ```
-With our node-schedule object initialized, we can start determining the rules for automation. Lets say I want to search for Donald Trump's most recent tweet every 30 minutes.
+With our node-schedule object initialized, we can start determining the rules for automation. Lets say I want to search for Donald Trump's most recent tweet every 30 minutes. In order to do this we will need to call on Node Schedule's scheduleJob method, which looks like this `var twitBot = schedule.scheduleJob('* * * * *', function(){...});`. 
+
+Wait a second, that first parameter, '* * * * *', looks really funny, what could that possibly mean? Well, this is the cron-style formatting I mentioned earlier on in the section. Here is what each asterisk means, 
+
+<p align="center">
+    <img src="jcarrabino.github.io/pics/textKeys.png">
+</p>
+
+So, if we wanted to schedule our bot to search for and reply to tweets every 30 minutes, that cron parameter would look like this, `'* /30 * * * *'`.
+
+As for the second parameter, `function(){...}`, inside those braces is where our functions to search for tweets, translate the text, and reply to the original poster would go. 
+
+### Cleaner Error logs
+Right now our error logs are returning the entire error object, not all of which is necessary. It also does not have a way to add a timestamp to each log file. To fix this we can install one final node.js add-on called Console Timestamp by running, `npm install console-timestamp` in the command line. 
+
+Like with every add on, we need to set up a timestamp object at the beginning of our bot.js script. We can do this by executing the following line of code,
+
+```javascript
+//Set up Timestamp
+var timestamp = require('console-timestamp');
+```
+
+Let's look at those error logs again. Until now we've just been calling, `console.log(err);`, which will return the following JSON object,
+
+```javascript
+{ [Error: Status is a duplicate.]
+  message: 'Status is a duplicate.',
+  code: 187,
+  allErrors: [ { code: 187, message: 'Status is a duplicate.' } ],
+  twitterReply: { errors: [ [Object] ] },
+  statusCode: 403 }
+```
+
+This is okay, but I think we can do better. The only things that would be very useful to pull from this would be `err.message` and `err.code`. On top of that it would be nice to have a timestamp output to our error logs as well. We can do this by replacing each call to `console.log(err);` with,
+
+```javascript
+console.log(timestamp());
+console.log('Error Message : ' + err.message, '\nCode: '+err.code);
+console.log('\n');
+```
+Now each time an error is logged it's output will look like this,
+```javascript
+09:20:53
+Error Message : Status is a duplicate.
+Code: 187
+```
+
 <br>
 <p align="center">
     <A href="https://jcarrabino.github.io/#this-guide-will-explain">Back to top</A>
 </p>
 # Tying it all Together
+So now we have all of the tools in our arsenal to make a fully functioning Twitter bot, we just have to incorporate everything covered up until now into one cohesive script.
+
+Here is what the finalized version of your bot.js script should look like,
+```javascript
+//Set up Twitter 
+var twit = require('twit');
+var config = require('./config.js');
+var Twitter = new twit(config);
+
+//Set up MSTranslator
+var MsTranslator = require('mstranslator');
+var MSconfig = require('./MSkey.js');
+var client = new MsTranslator(MSconfig, true);
+
+//Set up Node Schedule
+var schedule = require('node-schedule');
+
+//Set up Timestamp
+var timestamp = require('console-timestamp');
+
+//Automate bot to reply to tweet's based on scheduler's rules
+var trollBot = schedule.scheduleJob('*/30 * * * *', function(){
+    // find latest tweet according the query 'q' in params
+    var params = {
+        q: 'from:realDonaldTrump',  // REQUIRED
+        result_type: 'recent',
+        count: '1'
+    }
+    // for more parameters, see: https://dev.twitter.com/rest/reference/get/search/tweets
+
+    Twitter.get('search/tweets', params, function(err, data, response) {
+        // if there no errors
+        if (!err) {
+            
+            ogText = data.statuses[0].text;
+            retweetID = data.statuses[0].id_str;
+            name = data.statuses[0].user.screen_name;
+                
+            //Remove non alpha-numeric chars from tweet to save space 
+            //Russian translation increases character count
+            ogText = ogText.replace(/[,\!$%\^&\*;{}=\-_`~()]/g,"");
+            ogText = ogText.replace("\n","");
+            //Set Translation parameters
+            var params = {
+              text: ogText,
+              from: 'en',
+              to: 'ru'
+            };
+
+            // Translate text of original tweet
+            client.translate(params, function(err, data) {             
+                var twitText = JSON.stringify(data);
+                
+                // Russian text seems to add characters, this loop ensures
+                // total text length < 140 after translation/adding chars
+                if (twitText.length > 108) {
+                    while(twitText.length > 108){
+                        var index = twitText.lastIndexOf(' ');
+                        twitText = twitText.slice(0,index);
+                    }
+                    
+                    // Tell Twitter to reply to User with translated tweet
+                    Twitter.post('statuses/update', {in_reply_to_status_id: retweetID, 
+                    status: 'Translation: ' + twitText + '" @' + name}, function(err, data, response) {
+                        if (!err) {
+                            console.log('Successfully tweeted with string truncation!!!');
+                            console.log(timestamp());
+                        }
+                        // if there was an error while tweeting
+                        else{
+                            console.log('No new tweets');
+                            console.log(timestamp());
+                            console.log('Error Message : ' + err.message, '\nCode: '+err.code);
+                            console.log('\n');
+                        }
+                    });
+
+                    var diff = twitText.length - 140;
+                    twitText = twitText.substring(0, twitText.length - diff);
+                }
+                else{
+                    // Tell Twitter to reply to User with translated tweet
+                    Twitter.post('statuses/update', {in_reply_to_status_id: retweetID, 
+                    status: 'Translation: ' + twitText + ' @' + name}, function(err, data, response) {
+                        if (!err) {
+                            console.log('Successfully tweeted!!!');
+                            console.log(timestamp());
+                        }
+                        // if there was an error while tweeting
+                        else{
+                            console.log('No new tweets');
+                            console.log(timestamp());
+                            console.log('Error Message : ' + err.message, '\nCode: '+err.code);
+                            console.log('\n');
+                        }
+                    });
+
+                }
+            });
+        }
+        // if unable to Search a tweet
+        else {
+            console.log('Something went wrong while SEARCHING...');
+            console.log(timestamp());
+            console.log('Error Message : ' + err.message, '\nCode: '+err.code);
+        }
+    });
+});
+```
+
+To run this script open up a command line from the directory containing your bot.js file. Once there you can execute this script by running, `node bot.js` in the command line. Note that launching the bot this way will only keep it running so long as you're actively running the script. However, we want this bot to continue running long after we exit out of our command line. To do this we need to run bot.js with forever, which is located in your node-modules folder where all your dependencies are installed. You can run your bot with forever by executing the following command, `./node_modules/forever/bin/forever start bot.js`.
+
+This will keep your bot running until you stop it by running,`./node_modules/forever/bin/forever stop bot.js`, or one of the other stop commands listed in **[Forever's](https://github.com/foreverjs/forever)** documentation.
+
+If at any point you would like to view the logfile containing your bot's console logs, you can simply run, `./node_modules/forever/bin/forever logs`, which will return the name and location of your bot's logfile. 
+
+Once you've got your script up and running, check out your Twitter bot's profile and sese what kind of antics it can get up to.
+<p align="center">
+    <img src="jcarrabino.github.io/pics/trollBot.png">
+</p>
 
 <br>
 <p align="center">
@@ -387,6 +553,8 @@ With our node-schedule object initialized, we can start determining the rules fo
 - [Twit Node Client Documentation](https://github.com/ttezel/twit)
 - [MSTranslator Documentation](https://github.com/nanek/mstranslator)
 - [Node Schedule Documentation](https://github.com/node-schedule/node-schedule)
+- [Console Timestamp Documentation](https://www.npmjs.com/package/console-timestamp)
+- [Forever Documentation](https://github.com/foreverjs/forever)
 
 # The End
 <br>
