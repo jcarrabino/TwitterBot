@@ -14,12 +14,11 @@ Our finished bot will be able to pull a tweet from Twitter based your specified 
 # What is a Web API?
 The term API stands for Application Programming Interface. Twitter has its own API that defines a set of rules/methods on how other software can interact with it to get specific information (such as tweets, hashtags, etc.). The Twitter bot we will be making uses Twitter's API and Twit(a Twitter API Node Client) to allow us to send and retrieve data from Twitter.
 
-The easiest way to think about what an API is to use a restaurant analogy. Everything that is available on the menu of the restaurant would essentially be the public API. 2 main gotchas to make the analogy work:
+The easiest way to think about what an API is to use a restaurant analogy. Everything that is available on the menu of the restaurant would essentially be the public API, but there are two main gotchas to make the analogy work:
 1. the restaurant is giving out the food for free
 2. you can use the food to start your own little eatery.
-Almost all cloud based services offers some form of public API. Heck, even governments have API’s.
 
-There are also private API’s or undocumented API’s that are not exposed to the user. This would be the special menu the chef cooks for the staff that is unorderable by the general public. That special lobster fried rice with chestnuts and leek. Private API’s are essentially what were used to build the service itself.
+Almost all cloud based services offers some form of public API. Heck, even governments have API’s. There are also private API’s or undocumented API’s that are not exposed to the user. This would be the special menu the chef cooks for the staff that is unorderable by the general public. That special lobster fried rice with chestnuts and leek. Private API’s are essentially what were used to build the service itself.
 
 <br>
 <p align="center">
