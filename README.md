@@ -203,44 +203,42 @@ Twitter.get('search/tweets', params, function(err, data, response){
  });
 ```
 Returns the following Twitter JSON object and saves it in `data`,
-```
-{ statuses:
-   [ { created_at: 'Wed Mar 01 01:30:49 +0000 2017',
-       id: 836750538943377400,
-       id_str: '836750538943377408',
-       text: 'Join me live at 9:00 P.M. \n#JointAddress https://t.co/J882zbyVkJ https://t.co/gTtK3vJmkU',
-       truncated: false,
-       entities: [Object],
-       extended_entities: [Object],
-       metadata: [Object],
-       source: '<a href="http://twitter.com/download/iphone" rel="nofollow">Twitter for iPhone</a>',
-       in_reply_to_status_id: null,
-       in_reply_to_status_id_str: null,
-       in_reply_to_user_id: null,
-       in_reply_to_user_id_str: null,
-       in_reply_to_screen_name: null,
-       user: [Object],
-       geo: null,
-       coordinates: null,
-       place: null,
-       contributors: null,
-       is_quote_status: false,
-       retweet_count: 5976,
-       favorite_count: 38833,
-       favorited: false,
-       retweeted: false,
-       possibly_sensitive: false,
-       lang: 'en' } ],
-  search_metadata:
-   {[ completed_in: 0.012,
-     max_id: 0,
-     max_id_str: '0',
-     next_results: '?max_id=836750538943377407&q=from%3ArealDonaldTrump&count=1&include_entities=1&result_type=popular',
-     query: 'from%3ArealDonaldTrump',
-     count: 1,
-     since_id: 0,
-     since_id_str: '0' ] } };
-```
+> { statuses:
+>    [ { created_at: 'Wed Mar 01 01:30:49 +0000 2017',
+>        id: 836750538943377400,
+>        id_str: '836750538943377408',
+>        text: 'Join me live at 9:00 P.M. \n#JointAddress https://t.co/J882zbyVkJ https://t.co/gTtK3vJmkU',
+>        truncated: false,
+>        entities: [Object],
+>        extended_entities: [Object],
+>        metadata: [Object],
+>        source: '<a href="http://twitter.com/download/iphone" rel="nofollow">Twitter for iPhone</a>',
+>        in_reply_to_status_id: null,
+>        in_reply_to_status_id_str: null,
+>        in_reply_to_user_id: null,
+>        in_reply_to_user_id_str: null,
+>        in_reply_to_screen_name: null,
+>        user: [Object],
+>        geo: null,
+>        coordinates: null,
+>        place: null,
+>        contributors: null,
+>        is_quote_status: false,
+>        retweet_count: 5976,
+>        favorite_count: 38833,
+>        favorited: false,
+>        retweeted: false,
+>        possibly_sensitive: false,
+>        lang: 'en' } ],
+>   search_metadata:
+>    {[ completed_in: 0.012,
+>      max_id: 0,
+>      max_id_str: '0',
+>      next_results: '?max_id=836750538943377407&q=from%3ArealDonaldTrump&count=1&include_entities=1&result_type=popular',
+>      query: 'from%3ArealDonaldTrump',
+>      count: 1,
+>      since_id: 0,
+>      since_id_str: '0' ] } };
 
 ### Parsing Data from a JSON Response
 Wow, that JSON response is long and kind of intimidating, but don't worry, there are only a few pieces of data we will be using from it. For the purposes of our Twitter bot, we want to pull the `text` from a tweet for translation, as well as the original tweeter's `id_str` and `screen_name` in order to reply to the original tweet with our translated tweet. 
@@ -395,14 +393,12 @@ var timestamp = require('console-timestamp');
 
 Let's look at those error logs again. Until now we've just been calling, `console.log(err);`, which will return the following JSON object,
 
-```
-{ [Error: Status is a duplicate.]
-  message: 'Status is a duplicate.',
-  code: 187,
-  allErrors: [ { code: 187, message: 'Status is a duplicate.' } ],
-  twitterReply: { errors: [ [Object] ] },
-  statusCode: 403 }
-```
+> { [Error: Status is a duplicate.]
+>   message: 'Status is a duplicate.',
+>   code: 187,
+>   allErrors: [ { code: 187, message: 'Status is a duplicate.' } ],
+>   twitterReply: { errors: [ [Object] ] },
+>   statusCode: 403 }
 
 This is okay, but I think we can do better. The only things that would be very useful to pull from this would be `err.message` and `err.code`. On top of that it would be nice to have a timestamp output to our error logs as well. We can do this by replacing each call to `console.log(err);` with,
 
