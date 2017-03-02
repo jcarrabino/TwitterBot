@@ -231,7 +231,7 @@ Returns the following Twitter JSON object and saves it in `data`,
        retweeted: false,
        possibly_sensitive: false,
        lang: 'en' } ],
-  search_metadata:
+ search_metadata:
   [ {completed_in: 0.012,
      max_id: 0,
      max_id_str: '0',
