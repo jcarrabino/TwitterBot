@@ -203,7 +203,7 @@ Twitter.get('search/tweets', params, function(err, data, response){
  });
 ```
 Returns the following Twitter JSON object and saves it in `data`,
-```javascript
+```
 { statuses:
    [ { created_at: 'Wed Mar 01 01:30:49 +0000 2017',
        id: 836750538943377400,
