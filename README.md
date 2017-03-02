@@ -4,7 +4,7 @@
 - [How to get an MSTranslator Key](#get-your-mstranslator-api-key)
 - [How to use the Twitter API Node Client, Twit](#how-to-use-twit)
 - [Structure of an API Request](structure-of-an-api-request)
-- [How to use the MSTranslator API](#how-to-use-mstranslator)
+- [How to use the MSTranslator API](#how-to-use-ms-text-translator)
 - [How to automate your Twitter bot](#replying-to-tweets)
 
 # What will the finished bot look like?
@@ -17,8 +17,9 @@ Let's think of an analogy. Everyday I drive a car and through some miracle of en
 
 This is basically what we will be doing when using Twitter's API. We don't necessarily care about the deep inner workings of Twitter. We will just be using its API which will allow us to use Twitter's platform in our own programs.
 
-<br>
-[Back to top](#this-guide-will-explain)
+<p align="center">
+    <A href="https://jcarrabino.github.io/#this-guide-will-explain">Back to top</A>
+</p>
 # Get your Twitter API Key
 ### Signing up for Twitter
 First thing's first, we need to create a Twitter account for our bot. **[Signing up](https://twitter.com/signup)** for a Twitter account is fairly simple and should onle take a couple of minutes. After clicking on the "Signing up" hyperlink you will be redirected to the following screen, 
@@ -43,8 +44,9 @@ Now, click on the button that says "Create New App" which will send you to the f
 
 Here you will fill out all of the required fields in order to create your new Twitter app. If you are unsure of what to use for your website, you can just put your Twitter bot's profile page for now, which should look like this, "twitter.com/(Your-Twitter-Bot-UserName)"
 
-<br>
-[Back to top](#this-guide-will-explain)
+<p align="center">
+    <A href="https://jcarrabino.github.io/#this-guide-will-explain">Back to top</A>
+</p>
 ### Get your own Twitter API Key
 Now that we have an account and have created our application, we need to find our Twitter API Key. Keep in mind that each Twitter app has a unique API key used to access Twitter's API. With that being said, you should keep your API Key secret, as it is connected to you and we cannot make API calls to Twitter without a valid key.
 
@@ -69,8 +71,9 @@ Notice the tabs listed at the top right under your app's name. Now click the thi
 
 At this point you should take a moment to copy and paste your API Key, API Secret, Access Token, and Access Token Secret into a separate text document. You will need to use these later on, as these are the four keys you will need to access and work with Twitter's API.
 
-<br>
-[Back to top](#this-guide-will-explain)
+<p align="center">
+    <A href="https://jcarrabino.github.io/#this-guide-will-explain">Back to top</A>
+</p>
 # Get your MSTranslator API Key
 ### Signing up for an account on Windows Azure Marketplace
 Now that we have our Twitter API Keys/Tokens we can start working on getting our own MS Text Translator API Keys. In order to access Microsoft's Translator API we will need to create a Microsoft Azure account. If you already have a Microsoft affiliated email account then you can **[sign in](http://portal.azure.com/)** to Microsoft Azure with that. If not, then you can sign up for a Microsoft Azure account, **[here](http://azure.com/)**, by clicking on the link that says "Free Account" in the top-right corner.
@@ -101,8 +104,9 @@ If you successfully signed up for the MS Text Translator API then this page shou
 
 There will be two API Keys listed here, and you should copy and paste these keys into the same document you stored your Twitter API keys in as we will be using these later.
 
-<br>
-[Back to top](#this-guide-will-explain)
+<p align="center">
+    <A href="https://jcarrabino.github.io/#this-guide-will-explain">Back to top</A>
+</p>
 # How to use Twit
 ### Getting Twit up and running
 Before we can make calls to Twit, we will need to get our local environment up and running. For this guide it is assumed that you have node.js installed. If that is not the case, you can follow **[this guide](https://docs.npmjs.com/getting-started/installing-node)** in order to install node on your own. 
@@ -258,8 +262,9 @@ Twitter.get('search/tweets', params, function(err, data, response){
 ```
 So now we have a good idea of what kind of data we need to get and how to retrieve the data you need from the JSON object returned by Twitter.
 
-<br>
-[Back to top](#this-guide-will-explain)
+<p align="center">
+    <A href="https://jcarrabino.github.io/#this-guide-will-explain">Back to top</A>
+</p>
 # How to use MS Text Translator
 ### Get MSTranslator up and running
 You can install MS Translator by running, `npm install mstranslator`, in the command line. Once MSTranslator finishes installing you should create a new javascript file titled `MSKey.js` within your bot's directory. This is where we will store our MS Text Translator API Key. It should be noted that a subscription to the MS Text Translator gives you two API Keys, however each app you make only requires one key, so only use the first key for this part. The contents of `MSKey.js` should look like this,
@@ -305,20 +310,26 @@ The last parameter is the callback function. These callback functions use AJAX o
 
 So now that you know how to search for specific tweets, grab the data you need from them, and translate strings, it is time to tie everything we've covered together and create a bot capable of replying to tweets with translated text.
 
-<br>
-[Back to top](#this-guide-will-explain)
+<p align="center">
+    <A href="https://jcarrabino.github.io/#this-guide-will-explain">Back to top</A>
+</p>
 # Replying to tweets
 ### Pulling text from tweets to translate
 
-<br>
-[Back to top](#this-guide-will-explain)
+<p align="center">
+    <A href="https://jcarrabino.github.io/#this-guide-will-explain">Back to top</A>
+</p>
 # Scheduling tweets
 
+<p align="center">
+    <A href="https://jcarrabino.github.io/#this-guide-will-explain">Back to top</A>
+</p>
 # Resources:
 - [Twitter API Documentation](https://dev.twitter.com/overview/api)
 - [Twit Node Client Documentation](https://github.com/ttezel/twit)
 - [MSTranslator Documentation](https://github.com/nanek/mstranslator)
 
-<br>
 # The End
-[Back to top](#this-guide-will-explain)
+<p align="center">
+    <A href="https://jcarrabino.github.io/#this-guide-will-explain">Back to top</A>
+</p>
