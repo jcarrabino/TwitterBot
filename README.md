@@ -395,12 +395,12 @@ var timestamp = require('console-timestamp');
 
 Let's look at those error logs again. Until now we've just been calling, `console.log(err);`, which will return the following JSON object,
 ```javascript
- { ["Error": "Status is a duplicate."]
-   "messag"e: "Status is a duplicate.",
-   "code": 187,
-   "allErrors": [ { "code": 187, "message": "Status is a duplicate." } ],
-   "twitterRepl"y: { "errors": [ [Object] ] },
-   "statusCode": 403 }
+{ [Error: Status is a duplicate.]
+  message: 'Status is a duplicate.',
+  code: 187,
+  allErrors: [ { code: 187, message: 'Status is a duplicate.' } ],
+  twitterReply: { errors: [ [Object] ] },
+  statusCode: 403 }
 ```
 This is okay, but I think we can do better. The only things that would be very useful to pull from this would be `err.message` and `err.code`. On top of that it would be nice to have a timestamp output to our error logs as well. We can do this by replacing each call to `console.log(err);` with,
 
