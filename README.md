@@ -1,14 +1,14 @@
-# This guide will explain:
+# This Guide Will Explain:
 - [What is a Web API?](#what-is-a-web-api)
-- [How to get a Twitter API Key](#get-your-twitter-api-key)
-- [How to get an MSTranslator Key](#get-your-mstranslator-api-key)
+- [How to get a Twitter API Key](#get-a-twitter-api-key)
+- [How to get an MSTranslator Key](#get-an-mstranslator-api-key)
 - [How to use the Twitter API Node Client, Twit](#how-to-use-twit)
 - [Structure of an API Request](structure-of-an-api-request)
 - [How to use the MSTranslator API](#how-to-use-ms-text-translator)
 - [How to automate your Twitter bot](#replying-to-tweets)
 - [Tying it all Together](#tying-it-all-together)
 
-# What will the finished bot look like?
+# What Will the Finished Bot Look Like?
 Our finished bot will be able to pull a tweet from Twitter based your specified search criteria, then reply to the original tweet's user with a translation of their tweet in whatever language you choose. 
 
 # What is a Web API?
@@ -22,8 +22,8 @@ This is basically what we will be doing when using Twitter's API. We don't neces
 <p align="center">
     <A href="https://jcarrabino.github.io/#this-guide-will-explain">Back to top</A>
 </p>
-# Get your Twitter API Key
-### Signing up for Twitter
+# Get a Twitter API Key
+### Signing Up for Twitter
 First thing's first, we need to create a Twitter account for our bot. **[Signing up](https://twitter.com/signup)** for a Twitter account is fairly simple and should onle take a couple of minutes. After clicking on the "Signing up" hyperlink you will be redirected to the following screen, 
 
 <p align="center">
@@ -50,7 +50,7 @@ Here you will fill out all of the required fields in order to create your new Tw
 <p align="center">
     <A href="https://jcarrabino.github.io/#this-guide-will-explain">Back to top</A>
 </p>
-### Get your own Twitter API Key
+### Get Your Own Twitter API Key
 Now that we have an account and have created our application, we need to find our Twitter API Key. Keep in mind that each Twitter app has a unique API key used to access Twitter's API. With that being said, you should keep your API Key secret, as it is connected to you and we cannot make API calls to Twitter without a valid key.
 
 First thing you need to do is head back to the application management page, **[here](https://apps.twitter.com/)**. Notice how there is a new link on this page for the Twitter app that you just created,
@@ -78,7 +78,7 @@ At this point you should take a moment to copy and paste your API Key, API Secre
 <p align="center">
     <A href="https://jcarrabino.github.io/#this-guide-will-explain">Back to top</A>
 </p>
-# Get your MSTranslator API Key
+# Get an MSTranslator API Key
 ### Signing up for an account on Windows Azure Marketplace
 Now that we have our Twitter API Keys/Tokens we can start working on getting our own MS Text Translator API Keys. In order to access Microsoft's Translator API we will need to create a Microsoft Azure account. If you already have a Microsoft affiliated email account then you can **[sign in](http://portal.azure.com/)** to Microsoft Azure with that. If not, then you can sign up for a Microsoft Azure account, **[here](http://azure.com/)**, by clicking on the link that says "Free Account" in the top-right corner.
 
@@ -91,7 +91,7 @@ Once you're signed into Azure, go to the **[Cognitive Services](https://portal.a
 
 Under "API Type" select "Translator Text API" and in the "Pricing Tier" section select the "F0" option to use the free subscription for the MS Text Translator API. Your Microsoft Text Translato API subscription will begin immediately after completing the above form and clicking on the "Create" button.
 
-### Accessing your MSTranslator API Key
+### Accessing the MSTranslator API Key
 Now that we've successfully subscribed to Microsot Text Translator its time to head back to the **[Azure Portal](http://portal.azure.com/)** in order to access our API Keys.
 
 Once on the Azure Portal Dashboard, navigate to the panel on the far left and click on the link that says "All Resources." This will take to the following page,
@@ -113,7 +113,7 @@ There will be two API Keys listed here, and you should copy and paste these keys
     <A href="https://jcarrabino.github.io/#this-guide-will-explain">Back to top</A>
 </p>
 # How to use Twit
-### Getting Twit up and running
+### Getting Twit Up and Running
 Before we can make calls to Twit, we will need to get our local environment up and running. For this guide it is assumed that you have node.js installed. If that is not the case, you can follow **[this guide](https://docs.npmjs.com/getting-started/installing-node)** in order to install node on your own. 
 
 The first thing we need to do is to create a new directory(an empty folder) where the Twitter Bot's source code wil be stored. We will be using Twit, which is a Twitter API Client made for node.js. Twit contains a set of precompiled commands that will allow us to more easily interact with Twitter's API.
@@ -142,7 +142,7 @@ var Twitter = new twit(config);
 ```
 Now that we've initialized our Twit object we can access the methods provided to us by the Twit library. At this point we are ready to make test calls to send/receive data from Twitter. 
 
-# Structure of an API request
+# Structure of an API Request
 Let's say that I want to GET the most popular tweet sent out by Donald Trump. I could write something like this,
 
 ```javascript
@@ -242,7 +242,7 @@ Returns the following Twitter JSON object and saves it in `data`,
      since_id_str: '0' ] } };
 ```
 
-### Parsing data from a JSON response
+### Parsing Data from a JSON Response
 Wow, that JSON response is long and kind of intimidating, but don't worry, there are only a few pieces of data we will be using from it. For the purposes of our Twitter bot, we want to pull the `text` from a tweet for translation, as well as the original tweeter's `id_str` and `screen_name` in order to reply to the original tweet with our translated tweet. 
 
 Fortunately, these are easily accessible within our `data` object. Let's modify our get method's callback function in order to store the `id_str`, `screen_name`, and `text` into our own variables.
@@ -272,7 +272,7 @@ So now we have a good idea of what kind of data we need to get and how to retrie
     <A href="https://jcarrabino.github.io/#this-guide-will-explain">Back to top</A>
 </p>
 # How to use MS Text Translator
-### Get MSTranslator up and running
+### Get MSTranslator Up and Running
 Now that we've covered how to search for tweets, we should talk about how to translate their text contents using MS Text Translator. You can install MS Translator by running, `npm install mstranslator`, in the command line. Once MSTranslator finishes installing you should create a new javascript file titled `MSKey.js` within your bot's directory. This is where we will store our MS Text Translator API Key. It should be noted that a subscription to the MS Text Translator gives you two API Keys, however each app you make only requires one key, so only use the first key for this part. The contents of `MSKey.js` should look like this,
 ```javascript
 module.exports = {
@@ -292,7 +292,7 @@ var client = new MsTranslator(MSconfig, true);
 ```
 Now that we've initialized our MSTranslator object we can access the calls provided to us by the MSTranslator library. At this point we are ready to make test calls to send/receive data from MSTranslator. 
 
-### Translating text
+### Translating Text
 For our purposes we will only be covering MSTranslator's `translate` method. We will be calling this method with our MSTranslator object, which we have defined as `client`. 
 
 Let's say we wanted to translate a text string from English to Russian,
@@ -320,7 +320,7 @@ So now that you know how to search for specific tweets, grab the data you need f
 <p align="center">
     <A href="https://jcarrabino.github.io/#this-guide-will-explain">Back to top</A>
 </p>
-# Replying to tweets
+# Replying to Tweets
 At this point we've already discussed how to parse out the data we need from a Twitter API response, but that is only useful for GETting data. What we need to do now is use the data we've retrieved to POST a status update replying to the original tweet.
 
 There are a couple of things to keep in mind before POSTing a reply to Twitter. First, is that we need to ensure that the translated tweet has enough room to concatenate with the original poster's username, as well as any other text you wish to add to it. For my bot, I want to add "Translation: " to the beginning of the tweet, put double quotes around the translated text, and in order to make my tweet a reply it needs to end in " @realDonaldTrump". That is a total of 32 characters. Therefore I need to ensure that My bot can ensure that each translated tweet is less than or equal to 108 characters. We can add a simple conditional statement and formatting loop in order to meet these conditions,
@@ -362,7 +362,7 @@ Again, since this is formatted the same as the Twitter.get method, the `err` obj
 <p align="center">
     <A href="https://jcarrabino.github.io/#this-guide-will-explain">Back to top</A>
 </p>
-# Scheduling tweets
+# Scheduling Tweets
 In order to schedule when to send out tweets we will need the node.js add-on, Node Schedule, which can be installed by executing `npm install node-schedule` in the command line. Node Schedule allows us to use time-based scheduling in order to allow our bot to GET and POST tweets at predetermined times or dates using cron style formatting(which we will go over later in this section). 
 
 Similar to MS Text Translator and Twit, a node-schdule object needs to be initialized at the beginning of our `bot.js` file. So underneath where MS Text Translator and Twit are set up we will need to add the following chunk of code,
@@ -383,7 +383,7 @@ So, if we wanted to schedule our bot to search for and reply to tweets every 30 
 
 As for the second parameter, `function(){...}`, inside those braces is where our functions to search for tweets, translate the text, and reply to the original poster would go. 
 
-### Cleaner Error logs
+### Cleaner Error Logs
 Right now our error logs are returning the entire error object, not all of which is necessary. It also does not have a way to add a timestamp to each log file. To fix this we can install one final node.js add-on called Console Timestamp by running, `npm install console-timestamp` in the command line. 
 
 Like with every add on, we need to set up a timestamp object at the beginning of our bot.js script. We can do this by executing the following line of code,
