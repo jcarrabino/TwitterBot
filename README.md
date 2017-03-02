@@ -6,6 +6,7 @@
 - [Structure of an API Request](structure-of-an-api-request)
 - [How to use the MSTranslator API](#how-to-use-ms-text-translator)
 - [How to automate your Twitter bot](#replying-to-tweets)
+- [Tying it all Together](#tying-it-all-together)
 
 # What will the finished bot look like?
 Our finished bot will be able to pull a tweet from Twitter based your specified search criteria, then reply to the original tweet's user with a translation of their tweet in whatever language you choose. 
@@ -314,12 +315,52 @@ So now that you know how to search for specific tweets, grab the data you need f
     <A href="https://jcarrabino.github.io/#this-guide-will-explain">Back to top</A>
 </p>
 # Replying to tweets
-### Pulling text from tweets to translate
+At this point we've already discussed how to parse out the data we need from a Twitter API response, but that is only useful for GETting data. What we need to do now is use the data we've retrieved to POST a status update replying to the original tweet.
+
+There are a couple of things to keep in mind before POSTing a reply to Twitter. First, is that we need to ensure that the translated tweet has enough room to concatenate with the original poster's username, as well as any other text you wish to add to it. For my bot, I want to add "Translation: " to the beginning of the tweet, put double quotes around the translated text, and in order to make my tweet a reply it needs to end in " @realDonaldTrump". That is a total of 32 characters. Therefore I need to ensure that My bot can ensure that each translated tweet is less than or equal to 108 characters. We can add a simple conditional statement and formatting loop in order to meet these conditions,
+
+```javascript
+// Russian text seems to add characters, this loop ensures total 
+// text length < 140 after translation/adding chars to twitText
+if (twitText.length > 108) {
+    while(twitText.length > 108){
+        var index = twitText.lastIndexOf(' ');
+        twitText = twitText.slice(0,index);
+    }
+}
+```
+
+This section of code will check if the translated tweet's length is greater than 108, and if so it will trim off the last word of the string until it is less than or equal to 108 characters long.
+
+The second thing we need to do is post the translated tweet as a reply to the original tweet. Fortunately Twit's post method is structured similarly to its get method, `Twitter.post(path, [params], callback)`. Whenever we are posting a tweet, our path variable needs to be set to, `statuses/update`. As for the params object, all we need to put here are `in_reply_to_status_id`, which is the `id_str` of the original tweet's author, and the `status`, which is the text content of the tweet we wish to post.
+
+After running the conditional formatting loop, which formats the string contents of `twitText`, we can then send out our reply tweet with the following statement,
+
+```javascript   
+// Tell Twitter to reply to User with translated tweet
+Twitter.post('statuses/update', {in_reply_to_status_id: retweetID, 
+status: 'Translation: ' + twitText + '" @' + name}, function(err, data, response) {
+    if (!err) {
+         console.log('Successfully tweeted with string truncation!!!');
+    }
+    // if there was an error while tweeting
+    else{
+        console.log('No new tweets');
+        console.log(err);
+    }
+});
+```
+Again, since this is formatted the same as the Twitter.get method, the `err` object in the callback function will log any error messages received by Twitter if it could not post the tweet. So in the line, `if(!err)`, we are ensuring that the tweet was successfully posted before logging `console.log('Successfully tweeted with string truncation!!!');`. Now that we can run queries for tweets, pull the information we need from Twitter's API response, translate the text, and post it as a reply to the original tweeter, we can start focusing on how to automate our bot.
 
 <p align="center">
     <A href="https://jcarrabino.github.io/#this-guide-will-explain">Back to top</A>
 </p>
 # Scheduling tweets
+
+<p align="center">
+    <A href="https://jcarrabino.github.io/#this-guide-will-explain">Back to top</A>
+</p>
+# Tying it all Together
 
 <p align="center">
     <A href="https://jcarrabino.github.io/#this-guide-will-explain">Back to top</A>
