@@ -12,11 +12,14 @@
 Our finished bot will be able to pull a tweet from Twitter based your specified search criteria, then reply to the original tweet's user with a translation of their tweet in whatever language you choose. 
 
 # What is a Web API?
-API stands for Application Programming Interface. It's quite a mouthful and a fancy name for a relatively simple concept. In one sentence, an API is an interface that lets a program that you are writing control or access another program that some other person wrote. Now why would this be useful?
+The term API stands for Application Programming Interface. Twitter has its own API that defines a set of rules/methods on how other software can interact with it to get specific information (such as tweets, hashtags, etc.). The Twitter bot we will be making uses Twitter's API and Twit(a Twitter API Node Client) to allow us to send and retrieve data from Twitter.
 
-Let's think of an analogy. Everyday I drive a car and through some miracle of engineering neither I nor the car spontaneously combusts. I also get to my destination without many problems. Though fascinating, I do not really care precisely how every aspect of my car works. I just want to drive and get to where I need to go. The interface of the car would be the steering wheel, gearshift, gas pedal, break pedal, and all of the other controls that let me drive my car. Now, say I wanted to teach my good robot friend, Killroy, how to drive a car. When building him I would not have to teach him about the inner workings of the car. I would just show him how to use the "interface" (the gas pedal, steering wheel etc...)!
+The easiest way to think about what an API is to use a restaurant analogy. Everything that is available on the menu of the restaurant would essentially be the public API. 2 main gotchas to make the analogy work:
+1. the restaurant is giving out the food for free
+2. you can use the food to start your own little eatery.
+Almost all cloud based services offers some form of public API. Heck, even governments have API’s.
 
-This is basically what we will be doing when using Twitter's API. We don't necessarily care about the deep inner workings of Twitter. We will just be using its API which will allow us to use Twitter's platform in our own programs.
+There are also private API’s or undocumented API’s that are not exposed to the user. This would be the special menu the chef cooks for the staff that is unorderable by the general public. That special lobster fried rice with chestnuts and leek. Private API’s are essentially what were used to build the service itself.
 
 <br>
 <p align="center">
@@ -194,7 +197,7 @@ Let's examine what a potential GET request sent via URL would look like a bit mo
 - `?q=from%3ArealDonaldTrump&result_pe=popular&count=1`: Lastly this is the query we constructed from the `[params]` passed to the get method.
 
 ### The JSON Response
-After calling the get function with a valid request, all of the parsed JSON data we want will be located in the "data" object of the callback function. 
+When Twitter responds to our API Requests it sends up back information in JSON format. JSON simply stands for JavaScript Object Notation. If you would like to read more about anything and everything JSON check out [json.org](http://www.json.org/) for more information. Now, back to our Twitter bot... After calling the get function with a valid request, all of the JSON data we want will be located in the "data" object of the callback function. 
 
 So the function,
 ```javascript
