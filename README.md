@@ -394,7 +394,7 @@ var timestamp = require('console-timestamp');
 ```
 
 Let's look at those error logs again. Until now we've just been calling, `console.log(err);`, which will return the following JSON object,
-```javascript
+```json
  { [Error: Status is a duplicate.]
    message: 'Status is a duplicate.',
    code: 187,
